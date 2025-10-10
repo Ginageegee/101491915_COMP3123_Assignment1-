@@ -1,5 +1,10 @@
+//import express
 const express = require('express');
+
+//create new router object
 const router = express.Router();
+
+//import controller functions
 const {
     getAllEmployees,
     createEmployee,
@@ -8,6 +13,7 @@ const {
     deleteEmployee
 } = require('../controllers/employeeController');
 
+//requests
 router.get('/employees', getAllEmployees);
 router.post('/employees', createEmployee);
 router.get('/employees/:eid', getEmployeeById);

@@ -1,18 +1,14 @@
+
+//Import Employee Model
 const Employee = require('../models/Employee');
 
 // GET all employees
 exports.getAllEmployees = async (req, res) => {
-    try {
-        console.log('✅ getAllEmployees route hit');
-        const employees = await Employee.find();
-        res.status(200).json(employees);
-    } catch (error) {
-        console.error('❌ Error fetching employees:', error.message);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    const employees = await Employee.find();
+    res.status(200).json(employees);
 };
 
-// POST create new employee
+// POST create employee
 exports.createEmployee = async (req, res) => {
     const employee = await Employee.create(req.body);
     res.status(201).json({ message: 'Employee created successfully.', employee_id: employee._id });
@@ -30,7 +26,7 @@ exports.updateEmployee = async (req, res) => {
     res.status(200).json({ message: 'Employee details updated successfully.' });
 };
 
-// DELETE employee by query param
+// DELETE employee
 exports.deleteEmployee = async (req, res) => {
     await Employee.findByIdAndDelete(req.query.eid);
     res.status(204).json({ message: 'Employee deleted successfully.' });

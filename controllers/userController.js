@@ -1,5 +1,10 @@
+//Import user model
 const User = require('../models/User');
+
+//Import to hash passwords
 const bcrypt = require('bcryptjs');
+
+//Import from express-validator
 const { validationResult } = require('express-validator');
 
 // POST /api/v1/user/signup
@@ -11,6 +16,7 @@ exports.signup = async (req, res) => {
             return res.status(400).json({ status: false, errors: errors.array() });
         }
 
+        //Extract data from request
         const { username, email, password } = req.body;
 
         // Check if user already exists
@@ -63,7 +69,6 @@ exports.login = async (req, res) => {
 
         res.status(200).json({
             message: 'Login successful.'
-            // Optionally add JWT token here
         });
     } catch (error) {
         res.status(500).json({ status: false, message: error.message });
