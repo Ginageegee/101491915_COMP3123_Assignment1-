@@ -4,7 +4,6 @@ require('dotenv').config();
 const connectDB = require('../config/db');
 
 const app = express();
-
 connectDB();
 app.use(express.json());
 
@@ -18,4 +17,7 @@ app.use('/api/v1/emp', employeeRoutes);
 const userRoutes = require('../routes/userRoutes');
 app.use('/api/v1/user', userRoutes);
 
-module.exports = serverless(app);
+const handler = serverless(app);
+module.exports = async (req, res) => {
+    return await handler(req, res);
+};
